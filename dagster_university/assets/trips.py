@@ -1,12 +1,33 @@
-from dagster import asset
+from dagster import AssetIn, DataVersion, asset, observable_source_asset
 from dagster_duckdb import DuckDBResource
+from bs4 import BeautifulSoup
 
 import requests
 
 from ..partitions import monthly_partition
 
+@observable_source_asset(
+    group_name="raw_files",
+)
+def taxi_zones_endpoint():
+    """
+        The endpoint for the taxi zones dataset. Sourced from the NYC Open Data portal.
+    """
+    taxi_zone_info_url = "https://data.cityofnewyork.us/Transportation/NYC-Taxi-Zones/d3c5-ddgc"
+
+    response = requests.get(taxi_zone_info_url).text
+
+    soup = BeautifulSoup(response, 'html.parser')
+    element = soup.find(class_='aboutUpdateDate').find("span") # type: ignore
+
+    if not element:
+        raise Exception("The NYC Taxi Zones dataset endpoint has changed.")
+    
+    return DataVersion(element.get('data-rawdatetime')) # type: ignore
+
 @asset(
     group_name="raw_files",
+    non_argument_deps={"taxi_zones_endpoint"},
 )
 def taxi_zones_file():
     """
