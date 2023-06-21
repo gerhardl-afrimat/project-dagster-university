@@ -177,3 +177,5 @@ tmp*/
 *.parquet
 
 data/*/*
+
+logs
