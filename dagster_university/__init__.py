@@ -17,16 +17,16 @@ requests_assets = load_assets_from_modules(
     group_name="requests",
 )
 
-all_jobs = [trip_update_job, weekly_update_job, adhoc_request_job]
-all_schedules = [trip_update_schedule, weekly_update_schedule]
-all_sensors = [adhoc_request_sensor]
+# all_jobs = [trip_update_job, weekly_update_job, adhoc_request_job]
+# all_schedules = [trip_update_schedule, weekly_update_schedule]
+# all_sensors = [adhoc_request_sensor]
 
 defs = Definitions(
     assets=[*trip_assets, *metric_assets, *requests_assets],
-    resources={
-        "database": database_resource,
-    },
-    jobs=all_jobs,
-    schedules=all_schedules,
-    sensors=all_sensors,
+    # resources={
+    #     "database": database_resource,
+    # },
+    # jobs=all_jobs,
+    # schedules=all_schedules,
+    # sensors=all_sensors,
 )
