@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10,<3.13"
 dagster = "^1.5.4"
 urllib3 = "<2.0.0"
+kaleido = "<0.2.1"
 
 [tool.poetry.group.dev.dependencies]
 dagit = "^1.5.4"

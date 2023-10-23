@@ -754,6 +754,21 @@ MarkupSafe = ">=2.0"
 i18n = ["Babel (>=2.7)"]
 
 [[package]]
+name = "kaleido"
+version = "0.2.0"
+description = "Static image export for web-based visualization libraries with zero dependencies"
+optional = false
+python-versions = "*"
+files = [
+    {file = "kaleido-0.2.0-py2.py3-none-macosx_10_11_x86_64.whl", hash = "sha256:73f46490168f9af7aac3b01035ad8851457e5b0088bc61425ae3c56bf0968065"},
+    {file = "kaleido-0.2.0-py2.py3-none-macosx_11_0_arm64.whl", hash = "sha256:3af187bf6cc2b3af61f5737bf1b10f4ea75ba53391ae20e6df96784f6ca0a9a1"},
+    {file = "kaleido-0.2.0-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:9db17625f5c6ae4600762b97c1d8296d67be20f34a8854ebe5fb264acb5eed97"},
+    {file = "kaleido-0.2.0-py2.py3-none-manylinux2014_aarch64.whl", hash = "sha256:f264b876c7ea6622425fe25db8731e8dff4308a9e5a8753bdc78cdb4ffa1aadd"},
+    {file = "kaleido-0.2.0-py2.py3-none-win32.whl", hash = "sha256:54f41f426d18ff3cecf42549ff122fa841f15ab75c8fa8e19b40c3b282d19e8b"},
+    {file = "kaleido-0.2.0-py2.py3-none-win_amd64.whl", hash = "sha256:e083250f8a7b950fcb3978655960662aed74926629f2a278b4ad83787ce22020"},
+]
+
+[[package]]
 name = "mako"
 version = "1.2.4"
 description = "A super-fast templating language that borrows the best ideas from the existing templating languages."
@@ -1898,4 +1913,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10,<3.13"
-content-hash = "42b82e3c953220423fd0a451d9add335900bff1b2522bb792b63b9b2fc78636e"
+content-hash = "4ace55fcdd043a6a45ca923852cf8b9dd11e7e5c778e8a642dc7c7ebdf17297c"
