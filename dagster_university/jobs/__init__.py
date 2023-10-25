@@ -15,6 +15,10 @@ trip_update_job = define_asset_job(
 #     selection=AssetSelection.all() - trips_by_week - adhoc_request
 # )
 
+weekly_update_job = define_asset_job(
+    name="weekly_update_job",
+    selection=trips_by_week,
+)
 # weekly_update_job = define_asset_job(
 #     name="weekly_update_job",
 #     partitions_def=weekly_partition,
