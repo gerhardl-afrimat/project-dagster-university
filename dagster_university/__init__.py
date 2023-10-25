@@ -1,7 +1,7 @@
 from dagster import Definitions, load_assets_from_modules
 
 from .assets import trips, metrics, requests
-# from .resources import database_resource
+from .resources import database_resource
 # from .jobs import trip_update_job, weekly_update_job, adhoc_request_job
 # from .schedules import trip_update_schedule, weekly_update_schedule
 # from .sensors import adhoc_request_sensor
@@ -23,9 +23,9 @@ requests_assets = load_assets_from_modules(
 
 defs = Definitions(
     assets=[*trip_assets, *metric_assets, *requests_assets],
-    # resources={
-    #     "database": database_resource,
-    # },
+    resources={
+        "database": database_resource,
+    },
     # jobs=all_jobs,
     # schedules=all_schedules,
     # sensors=all_sensors,
