@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 
 from . import constants
 
-from ..partitions import weekly_partition
+# from ..partitions import weekly_partition
 
 @asset(
     deps=["taxi_trips", "taxi_zones"]

@@ -1,10 +1,10 @@
 from dagster import Definitions, load_assets_from_modules
 
 from .assets import trips, metrics, requests
-from .resources import database_resource
-from .jobs import trip_update_job, weekly_update_job, adhoc_request_job
-from .schedules import trip_update_schedule, weekly_update_schedule
-from .sensors import adhoc_request_sensor
+# from .resources import database_resource
+# from .jobs import trip_update_job, weekly_update_job, adhoc_request_job
+# from .schedules import trip_update_schedule, weekly_update_schedule
+# from .sensors import adhoc_request_sensor
 
 ## Lesson 5 -> prob every other section after that
 trip_assets = load_assets_from_modules([trips])

@@ -5,7 +5,7 @@ import requests
 
 from . import constants
 
-from ..partitions import monthly_partition
+# from ..partitions import monthly_partition
 
 import duckdb
 import os
