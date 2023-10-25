@@ -2,9 +2,13 @@ from dagster import define_asset_job, AssetSelection
 
 # from ..partitions import monthly_partition, weekly_partition
 
-# trips_by_week = AssetSelection.keys("trips_by_week")
+trips_by_week = AssetSelection.keys(["trips_by_week"])
 # adhoc_request = AssetSelection.keys("adhoc_request")
 
+trip_update_job = define_asset_job(
+    name="trip_update_job",
+    selection=AssetSelection.all() - trips_by_week
+)
 # trip_update_job = define_asset_job(
 #     name="trip_update_job",
 #     partitions_def=monthly_partition,
