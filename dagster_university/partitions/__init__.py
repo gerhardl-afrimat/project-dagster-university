@@ -10,3 +10,8 @@ monthly_partition = MonthlyPartitionsDefinition(
     start_date=start_date,
     end_date=end_date,
 )
+
+weekly_partition = WeeklyPartitionsDefinition(
+    start_date=start_date,
+    end_date=end_date,
+)
