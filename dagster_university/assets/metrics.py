@@ -7,8 +7,6 @@ import geopandas as gpd
 import base64
 import pandas as pd
 
-import duckdb
-import os
 from datetime import datetime, timedelta
 
 from . import constants
@@ -18,7 +16,7 @@ from . import constants
 @asset(
     deps=["taxi_trips", "taxi_zones"]
 )
-def manhattan_stats():
+def manhattan_stats(database: DuckDBResource):
     query = """
         select
             zones.zone,
@@ -30,8 +28,8 @@ def manhattan_stats():
         group by zone, borough, geometry
     """
 
-    conn = duckdb.connect(os.getenv("DUCKDB_DATABASE"))
-    trips_by_zone = conn.execute(query).fetch_df()
+    with database.get_connection() as conn:
+        trips_by_zone = conn.execute(query).fetch_df()
 
     trips_by_zone["geometry"] = gpd.GeoSeries.from_wkt(trips_by_zone["geometry"])
     trips_by_zone = gpd.GeoDataFrame(trips_by_zone)
@@ -62,7 +60,7 @@ def manhattan_map():
 @asset(
     deps=["taxi_trips"]
 )
-def trips_by_week():
+def trips_by_week(database: DuckDBResource):
     # # sundays = ['2023-03-05', '2023-03-12', '2023-03-19', '2023-03-26']
     # start = '2023-03-01'
     # end = '2023-03-31'
@@ -77,7 +75,6 @@ def trips_by_week():
     #     where period > {start} and period + interval '1 week' <= {end}
     #     group by period
     # """
-    conn = duckdb.connect(os.getenv("DUCKDB_DATABASE"))
 
     current_date = datetime.strptime("2023-03-01", constants.DATE_FORMAT)
     end_date = datetime.strptime("2023-04-01", constants.DATE_FORMAT)
@@ -93,7 +90,8 @@ def trips_by_week():
             where date_trunc('week', pickup_datetime) = date_trunc('week', '{current_date_str}'::date)
         """
 
-        data_for_week = conn.execute(query).fetch_df()
+        with database.get_connection() as conn:
+            data_for_week = conn.execute(query).fetch_df()
 
         aggregate = data_for_week.agg({
             "vendor_id": "count",

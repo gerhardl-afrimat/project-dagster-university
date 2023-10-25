@@ -7,9 +7,6 @@ from . import constants
 
 # from ..partitions import monthly_partition
 
-import duckdb
-import os
-
 ## Lesson 3
 @asset
 def taxi_trips_file():
@@ -65,11 +62,11 @@ def taxi_trips(database: DuckDBResource):
 @asset(
 	deps=["taxi_zones_file"]
 )
-def taxi_zones():
+def taxi_zones(database: DuckDBResource):
     """
     The raw taxi zones dataset, loaded into a DuckDB database
     """
-    sql_query = f"""
+    query = f"""
             create or replace table zones as (
                     select
                             LocationID as zone_id,
@@ -80,8 +77,8 @@ def taxi_zones():
             );
     """
 
-    conn = duckdb.connect(os.getenv("DUCKDB_DATABASE"))
-    conn.execute(sql_query)
+    with database.get_connection() as conn:
+        conn.execute(query)
 
 # ## Lesson 3 (change this to HW)
 # @asset(
