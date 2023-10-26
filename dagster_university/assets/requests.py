@@ -7,11 +7,11 @@ import base64
 
 from . import constants
 
-class AdhocRequestConfig(Config):
-    filename: str
-    borough: str
-    start_date: str
-    end_date: str
+# class AdhocRequestConfig(Config):
+#     filename: str
+#     borough: str
+#     start_date: str
+#     end_date: str
 
 # ## Lesson 9
 # @asset(
