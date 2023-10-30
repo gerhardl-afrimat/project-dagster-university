@@ -10,11 +10,11 @@ from .sensors import adhoc_request_sensor
 trip_assets = load_assets_from_modules([trips])
 metric_assets = load_assets_from_modules(
     modules=[metrics],
-    # group_name="metrics",
+    group_name="metrics",
 )
 requests_assets = load_assets_from_modules(
     modules=[requests],
-    # group_name="requests",
+    group_name="requests",
 )
 
 # all_jobs = [trip_update_job, weekly_update_job]

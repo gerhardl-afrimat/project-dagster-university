@@ -10,6 +10,7 @@ from ..partitions import monthly_partition
 ## Lesson 3
 @asset(
         partitions_def=monthly_partition,
+        group_name="raw_files",
 )
 def taxi_trips_file(context):
     """The raw parquet files for the taxi trips dataset. Sourced from the NYC Open Data portal."""
@@ -25,7 +26,9 @@ def taxi_trips_file(context):
         output_file.write(raw_trips.content)
 
 ## Lesson 3
-@asset
+@asset(
+        group_name="raw_files",
+)
 def taxi_zones_file():
     """The raw CSV file for the taxi zones dataset. Sourced from the NYC Open Data portal."""
     raw_taxi_zones = requests.get(
@@ -38,6 +41,7 @@ def taxi_zones_file():
 @asset(
 	deps=["taxi_trips_file"],
         partitions_def=monthly_partition,
+        group_name="ingested",
 )
 def taxi_trips(context, database: DuckDBResource):
     """
@@ -76,7 +80,8 @@ def taxi_trips(context, database: DuckDBResource):
         conn.execute(query)
 
 @asset(
-	deps=["taxi_zones_file"]
+	deps=["taxi_zones_file"],
+        group_name="ingested",
 )
 def taxi_zones(database: DuckDBResource):
     """
